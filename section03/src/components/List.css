@@ -1,0 +1,27 @@
+.List {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.List > input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid rgb(220, 220, 220);
+/*    \
+border-bottom: 하단 경계선을 지정합니다.
+1px: 경계선의 두께를 1 픽셀로 지정합니다.
+solid: 경계선의 스타일을 실선으로 지정합니다.
+rgb(220, 220, 220): 경계선의 색상을 지정합니다. 여기서는 회색 계열의 RGB 값(220, 220, 220)을 사용하여 회색 경계선을 생성합니다.*/
+    padding: 15px 0px;
+}
+
+.List > input:focus {
+    outline: none;
+    border-bottom: 1px solid rgb(37, 147, 255);
+}
+
+.List .todos_wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
