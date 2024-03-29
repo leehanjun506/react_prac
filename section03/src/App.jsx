@@ -2,25 +2,13 @@ import './App.css'
 import Header from "./components/Header.jsx";
 import Editor from "./components/Editor.jsx";
 import List from "./components/List.jsx";
-import {useCallback, useReducer, useRef, useState} from "react";
+import {createContext, useCallback, useMemo, useReducer, useRef, useState} from "react";
 
 const mockData = [
     {
         id: 0,
         isDone: false,
         content: "React 공부하기",
-        date: new Date().getTime(),
-    },
-    {
-        id: 1,
-        isDone: false,
-        content: "Oke Test",
-        date: new Date().getTime(),
-    },
-    {
-        id: 2,
-        isDone: false,
-        content: "React Test",
         date: new Date().getTime(),
     },
 ]
@@ -37,6 +25,9 @@ function reducer(state, action) {
             return state;
     }
 }
+
+export const TodoStateContext = createContext();
+export const TodoDispatchContext = createContext();
 function App() {
     // const [todos, setTodos] = useState(mockData);
     const [todos, dispatch] = useReducer(reducer, mockData);
@@ -83,13 +74,23 @@ function App() {
         })
         // setTodos(todos.filter((todo) => todo.id !== targetId));
     }, []);
-  return (
-    <div className="App">
-        <Header/>
-        <Editor onCreate={onCreate}/>
-        <List todos={todos} onUpdate={onUpdate} onDelete={onDelete}/>
-    </div>
-  )
+
+    const memoizedDispatch = useMemo(() => {
+        return {onCreate, onUpdate, onDelete};
+    }, []);
+    return (
+        <div className="App">
+            <Header/>
+            <TodoStateContext.Provider value={todos}>
+                <TodoDispatchContext.Provider
+                    value={memoizedDispatch}jdklsf
+                >
+                    <Editor/>
+                    <List/>
+                </TodoDispatchContext.Provider>
+            </TodoStateContext.Provider>
+        </div>
+    );
 }
 
 export default App

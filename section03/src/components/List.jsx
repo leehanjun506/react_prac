@@ -1,8 +1,10 @@
-import React, {useMemo, useState} from 'react';
+import React, {useContext, useMemo, useState} from 'react';
 import './List.css'
 import TodoItem from "./TodoItem.jsx";
+import {TodoStateContext} from "../App.jsx";
 
-const List = ({todos , onUpdate, onDelete}) => {
+const List = () => {
+    const todos = useContext(TodoStateContext);
 
     const [search, setSearch] = useState("");
 
@@ -55,8 +57,6 @@ const List = ({todos , onUpdate, onDelete}) => {
                         <TodoItem
                             key={todo.id}
                             {...todo}
-                            onUpdate={onUpdate}
-                            onDelete={onDelete}
                         />
                     );
 

@@ -1,6 +1,8 @@
-import React, {memo, useRef, useState} from 'react';
+import React, {memo, useContext, useRef, useState} from 'react';
 import './Editor.css'
-const Editor = ({onCreate}) => {
+import {TodoDispatchContext} from "../App.jsx";
+const Editor = () => {
+    const {onCreate} = useContext(TodoDispatchContext);
     const [content, setContent] = useState("");
     const contentRef = useRef();
     const onChangeContent = (e) =>{
